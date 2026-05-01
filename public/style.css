@@ -1,0 +1,348 @@
+
+body{
+
+    padding: 0;
+    margin: 0;
+
+    background-color: #FAFAFA;
+}
+
+header{
+
+    width: 100vw;
+    height: 10vh;
+
+    background-color: #6F8FAF;
+    color: white;
+
+    display: flex;
+
+    flex-direction: row;
+
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+
+#header_text{
+
+    height: 100%;
+    width: 15vw;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    line-height: 100%;
+}
+
+#setting_box{
+
+    height: 100%;
+    width: 15vw;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    line-height: 100%;
+
+}
+
+#save_button{
+
+    cursor: pointer;
+    user-select: none;
+
+}
+
+main{
+
+    width: 100vw;
+    height: 85vh;
+
+
+}
+
+footer{
+
+    width: 100vw;
+    height: 5vh;
+    
+
+}
+
+#charecter_main_box{
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+
+
+}
+
+.charecter_main_subdevition{
+
+    width: 30vw;
+    height: 80%;
+
+
+}
+
+
+/* Picture ------------------------------------- */
+
+#picture_subdevition_box{
+
+    width: 100%;
+    height: 100%;
+
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#picture_box{
+
+    width: 20vw;
+    height: 50vh;
+
+    border: solid black 1px;
+
+    border-radius: 10px;
+
+    background-color: white;
+}
+
+#hp_box{
+
+    width: 20vw;
+    height: 15vh;
+
+    border: solid black 1px;
+
+    border-radius: 10px;
+
+    background-color: white;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    
+}
+
+/* Invetory ------------------------------------------- */
+
+#inventory_subdevition_box{
+    
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: end;
+    align-items: center;
+    
+
+}
+
+#inventory_subdevition_sub_box{
+
+    width: 100%;
+    min-height: 60vh;
+    max-height: 100%;
+
+    height: fit-content;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+
+#armor_and_weapon_box{
+
+    width: 20vw;
+    height: 15vh;
+
+    border: solid black 1px;
+
+    border-radius: 10px;
+
+    margin-bottom: 2vh;
+
+    background-color: white;
+
+}
+
+#main_weapon_Box{
+    width: 100%;
+    height: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+#armor_Box{
+
+    width: 100%;
+    height: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+#inventory_box{
+
+    width: 20vw;
+    height: fit-content;
+
+    min-height: 35vh;
+    max-height: 60vh;
+
+    border: solid black 1px;
+
+    border-radius: 10px;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    overflow-y:hidden;
+
+    background-color: white;
+
+
+}
+
+#inventory_list{
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex: wrap;
+
+    flex-direction: column;
+
+    
+}
+
+#inventory_list b{
+    line-height: 2rem;
+}
+
+/* Stats --------------------------------------------- */
+
+#stats_subdevition_box{
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-evenly;
+    align-items: center;
+
+    
+
+}
+
+.stat_box{
+
+    width: 20vw;
+    height: 14vh;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: solid black 1px;
+    border-radius: 10px;
+
+    background-color: white;
+
+}
+
+.stat_name_box{
+
+    width: 50%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+}
+
+.stat_incrament_box{
+
+    width: 50%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+}
+
+.stat_incrament_box button{
+
+    width: 1.5vw;
+    height: 1.5vw;
+
+    border: solid 1px;
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    
+}
+
+.stat_value_box{
+    width: 3vw;
+    height: 3vw;
+
+    min-width: 5px;
+    min-height: 5px;
+
+    border: solid black 1px;
+
+    border-radius: 5px;
+
+    
+    margin-left: 0.1vw;
+    margin-right: 0.1vw;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.stat_value_box p{
+
+    font-size: 1.5rem;
+
+}
+
+
