@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
@@ -12,6 +14,10 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "better-sqlite3": "^12.9.0",
+    "body-parser": "^2.2.2",
+    "dotenv": "^17.4.2",
+    "drizzle-orm": "^0.45.2",
     "ejs": "^5.0.2",
     "express": "^5.2.1",
     "express-ejs-layouts": "^2.5.1",
@@ -19,5 +25,8 @@
     "jsdom": "^29.1.1",
     "npm": "^11.13.0",
     "sqlite3": "^6.0.1"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.31.10"
   }
 }

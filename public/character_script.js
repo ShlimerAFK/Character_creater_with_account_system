@@ -24,19 +24,21 @@ let dexterity;
 let intelligence;
 let charisma;
 
-
-async function load_charecter(){
-
-    const response = await fetch("/charecter_stats");
-    const charecter_data = await response.json();
-
-    console.log(charecter_data);
+const id = 1;
 
 
-    strength = charecter_data.strength;
-    dexterity = charecter_data.dexterity;
-    intelligence = charecter_data.intelligence;
-    charisma = charecter_data. charisma;
+async function load_character(){
+
+    const response = await fetch(`/character_stats/${id}`);
+    const character_data = await response.json();
+
+    console.log(character_data);
+
+
+    strength = character_data.strength;
+    dexterity = character_data.dexterity;
+    intelligence = character_data.intelligence;
+    charisma = character_data. charisma;
 
 
     str_value.innerText = strength;
@@ -46,23 +48,29 @@ async function load_charecter(){
     
 }
 
-async function save_charecter(){
+async function save_character(){
+    try{
+        console.log("Posting")
 
-    console.log("Posting")
-
-    const response = await fetch("/uppdate_stats", {
-        method: "PUT",
-        body: JSON.stringify({
-            strength: strength,
-            dexterity: dexterity,
-            intelligence: intelligence,
-            charisma: charisma
+        const response = await fetch("/uppdate_stats", {
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            method: "PUT",
+            body: JSON.stringify({
+                strength: strength,
+                dexterity: dexterity,
+                intelligence: intelligence,
+                charisma: charisma,
+                id: 1
+            })
         })
-    })
-    const data = await response.json();
+        const data = await response.json();
 
-    console.log(data)
-    
+        console.log(data)
+    }catch(error){
+        console.log(error)
+    }
 }
 
 function increase_stat(stat){
@@ -111,9 +119,9 @@ function decrease_stat(stat){
 
 // Loose code 
 
-window.onload = load_charecter();
+window.onload = load_character();
 
-save_button.addEventListener("click", () => save_charecter());
+save_button.addEventListener("click", () => save_character());
 
 str_incrament.addEventListener("click", () => increase_stat("strength"));
 str_decrament.addEventListener("click", () => decrease_stat("strength"));

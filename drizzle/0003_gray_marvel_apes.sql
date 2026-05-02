@@ -1,0 +1,1 @@
+ALTER TABLE `character` ADD `name` text NOT NULL;

@@ -1,6 +1,10 @@
 
 const { title } = require("node:process");
 
+const { db } = require('../src/db')
+const { character } = require('../src/schema')
+const { eq } = require('drizzle-orm');
+
 // Variable definitions
 
 main_weapon = "Sworb";
@@ -30,7 +34,7 @@ user_credentials = [{
     id: 1,
     username: "admin",
     password: "pasword123",
-    charecter: {
+    character: {
         strength: 5,
         dexterity: 5,
         intelligence: 5,
@@ -41,27 +45,21 @@ user_credentials = [{
 
 // Functions
 
-function uppdate_charecter_stats(charecter_stats){
+function uppdate_character_stats(current_character, uppdated_stats){
 
-    console.log(charecter_stats)
+    current_character.strength = uppdated_stats.strength;
+    current_character.dexterity = uppdated_stats.dexterity;
+    current_character.intelligence = uppdated_stats.intelligence;
+    current_character.charisma = uppdated_stats.charisma;
+    
 
-    strength = charecter_stats.strength
 }
 
-function get_charecter_from_user(input_id){
+function get_character_from_user_SQL(id){
 
+    const rows = db.select().from(character).where(eq(character.id, id)).get();
 
-    let current_user;
-
-    for(let i = 0; i < user_credentials.length; i++){
-
-        if(input_id === user_credentials[i].id){
-            
-            current_user = user_credentials[i];
-            return current_user.charecter;
-            
-        }
-    }
+    return rows;
 }
 
 function add_user(){};
@@ -97,8 +95,8 @@ module.exports = {
     change_current_hp,
     change_armor,
     change_weapon,
-    uppdate_charecter_stats,
-    get_charecter_from_user,
+    uppdate_character_stats,
+    get_character_from_user_SQL,
 
     strength,
     intelligence,
