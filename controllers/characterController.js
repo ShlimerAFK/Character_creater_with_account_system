@@ -12,9 +12,19 @@ function render_character_page(req,res){
 };
 
 
-function render_log_in_page(req,res){};
+function render_log_in_page(req,res){
 
-function render_register_page(req,res){};
+    res.render("login",{
+        title: "Login"
+    })
+};
+
+function render_register_page(req,res){
+
+    res.render("register",{
+        title: "Register"
+    })
+};
 
 function render_account_settings_page(req,res){
 

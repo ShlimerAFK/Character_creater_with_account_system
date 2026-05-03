@@ -40,7 +40,7 @@ body{
     line-height: 100%;
 }
 
-#setting_box{
+#settings_box{
 
     height: 100%;
     width: 15vw;
@@ -50,6 +50,16 @@ body{
     justify-content: space-evenly;
 
     line-height: 100%;
+
+}
+
+#settings_box a{
+
+    color: white;
+    font-size: 1rem;
+
+    text-decoration: none;
+    
 
 }
 
