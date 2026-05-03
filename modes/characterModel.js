@@ -45,14 +45,14 @@ user_credentials = [{
 
 // Functions
 
-function uppdate_character_stats(current_character, uppdated_stats){
+function uppdate_character_stats(id, uppdated_stats){
 
-    current_character.strength = uppdated_stats.strength;
-    current_character.dexterity = uppdated_stats.dexterity;
-    current_character.intelligence = uppdated_stats.intelligence;
-    current_character.charisma = uppdated_stats.charisma;
+    db.update(character).set(uppdated_stats).where(eq(character.id, id)).run();
+
+    const new_stats = db.select().from(character).where(eq(character.id, id)).get();
+
+    return new_stats;
     
-
 }
 
 function get_character_from_user_SQL(id){

@@ -52,7 +52,7 @@ async function save_character(){
     try{
         console.log("Posting")
 
-        const response = await fetch("/uppdate_stats", {
+        const response = await fetch(`/uppdate_stats/${id}`, {
             headers: {
             'Content-Type': 'application/json'
             },

@@ -1,5 +1,17 @@
-<header> 
-    <div id="header_text">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/character_style.css">
+</head>
+
+<body>
+
+<header id="character_header"> 
+
+    <div class="header_text_box">
 
         <h1><%= title %></h1>
 
@@ -13,123 +25,130 @@
     </div>
 </header>
 
-<div id="charecter_main_box">
+<main>
 
-    <!-- STATS -->
-    <div class="charecter_main_subdevition">
+    <div id="charecter_main_box">
 
-        <div id="stats_subdevition_box">
+        <!-- STATS -->
+        <div class="charecter_main_subdevition">
 
-            <!-- Strength -->
-            <div class="stat_box"> 
+            <div id="stats_subdevition_box">
 
-                <div class="stat_name_box">
-                    <h2>Strength</h2> 
+                <!-- Strength -->
+                <div class="stat_box"> 
+
+                    <div class="stat_name_box">
+                        <h2>Strength</h2> 
+                    </div>
+
+                    <div class="stat_incrament_box">
+                        <button id="Str_decrament_button"> - </button> 
+                        <div class="stat_value_box"> <p id="Strength_value_box"> ... </p> </div>
+                        <button id="Str_incrament_button"> + </button>
+                    </div>
+                
                 </div>
 
-                <div class="stat_incrament_box">
-                    <button id="Str_decrament_button"> - </button> 
-                    <div class="stat_value_box"> <p id="Strength_value_box"> ... </p> </div>
-                    <button id="Str_incrament_button"> + </button>
+                <!-- dexstarity -->
+                <div class="stat_box"> 
+
+                    <div class="stat_name_box">
+                        <h2>Dexstarity</h2> 
+                    </div>
+
+                    <div class="stat_incrament_box">
+                        <button id="Dex_decrament_button"> - </button> 
+                        <div class="stat_value_box"> <p id="Dextarity_value"> ... </p> </div>
+                        <button id="Dex_incrament_button"> + </button>
+                    </div>
+                
                 </div>
-            
+
+                <!-- Inteligence -->
+                <div class="stat_box"> 
+
+                    <div class="stat_name_box">
+                        <h2>Inteligence</h2> 
+                    </div>
+
+                    <div class="stat_incrament_box">
+                        <button id="Int_decrament_button"> - </button> 
+                        <div class="stat_value_box"> <p id="Inteligence_value_box"> ... </p> </div>
+                        <button id="Int_incrament_button"> + </button>
+                    </div>
+                
+                </div>
+
+                <!-- Charisma -->
+                <div class="stat_box"> 
+
+                    <div class="stat_name_box">
+                        <h2>Charisma</h2> 
+                    </div>
+
+                    <div class="stat_incrament_box">
+                        <button id="Cha_decrament_button"> - </button> 
+                        <div  class="stat_value_box"> <p id="Charisma_value_box"> ... </p> </div>
+                        <button id="Cha_incrament_button"> + </button>
+                    </div>
+                
+                </div>
+
             </div>
 
-            <!-- dexstarity -->
-            <div class="stat_box"> 
+        </div>
 
-                <div class="stat_name_box">
-                    <h2>Dexstarity</h2> 
-                </div>
+        <!-- PICTURE -->
+        <div class="charecter_main_subdevition">
 
-                <div class="stat_incrament_box">
-                    <button id="Dex_decrament_button"> - </button> 
-                    <div class="stat_value_box"> <p id="Dextarity_value"> ... </p> </div>
-                    <button id="Dex_incrament_button"> + </button>
-                </div>
-            
+            <div id="picture_subdevition_box">
+
+                <div id="picture_box"></div>
+
+                <div id="hp_box"> <h2>HP: 100</h2> </div>
+
             </div>
 
-            <!-- Inteligence -->
-            <div class="stat_box"> 
+        </div>
 
-                <div class="stat_name_box">
-                    <h2>Inteligence</h2> 
+        <!-- INVENTORY -->
+        <div class="charecter_main_subdevition">
+
+            <div id="inventory_subdevition_box">
+
+                <div id="inventory_subdevition_sub_box">
+                    <div id="armor_and_weapon_box">
+
+                        <div id="main_weapon_Box"> <h2>Weapon</h2> <p>: Sword</p></div>
+                        <div id="armor_Box">    <h2>Armor</h2> <p>: Cardbord</p></div>
+
+                    </div>
+                    <div id="inventory_box">
+                        <ul id="inventory_list">
+                            <b>Postion</b>
+                            <b>Rusty dagger</b>
+                            <b>Boddypilow</b>
+                            <b>Boddypilow</b>
+                            <b>Boddypilow</b>
+                            <b>Boddypilow</b>
+                            <b>Boddypilow</b>
+                            <b>Boddypilow</b>
+                    
+                        </ul>
+                    </div>
                 </div>
 
-                <div class="stat_incrament_box">
-                    <button id="Int_decrament_button"> - </button> 
-                    <div class="stat_value_box"> <p id="Inteligence_value_box"> ... </p> </div>
-                    <button id="Int_incrament_button"> + </button>
-                </div>
-            
-            </div>
-
-            <!-- Charisma -->
-            <div class="stat_box"> 
-
-                <div class="stat_name_box">
-                    <h2>Charisma</h2> 
-                </div>
-
-                <div class="stat_incrament_box">
-                    <button id="Cha_decrament_button"> - </button> 
-                    <div  class="stat_value_box"> <p id="Charisma_value_box"> ... </p> </div>
-                    <button id="Cha_incrament_button"> + </button>
-                </div>
-            
             </div>
 
         </div>
 
     </div>
+</main>
+<footer>  </footer>
 
-    <!-- PICTURE -->
-    <div class="charecter_main_subdevition">
-
-        <div id="picture_subdevition_box">
-
-            <div id="picture_box"></div>
-
-            <div id="hp_box"> <h2>HP: 100</h2> </div>
-
-        </div>
-
-    </div>
-
-    <!-- INVENTORY -->
-    <div class="charecter_main_subdevition">
-
-        <div id="inventory_subdevition_box">
-
-            <div id="inventory_subdevition_sub_box">
-                <div id="armor_and_weapon_box">
-
-                    <div id="main_weapon_Box"> <h2>Weapon</h2> <p>: Sword</p></div>
-                    <div id="armor_Box">    <h2>Armor</h2> <p>: Cardbord</p></div>
-
-                </div>
-                <div id="inventory_box">
-                    <ul id="inventory_list">
-                        <b>Postion</b>
-                        <b>Rusty dagger</b>
-                        <b>Boddypilow</b>
-                        <b>Boddypilow</b>
-                        <b>Boddypilow</b>
-                        <b>Boddypilow</b>
-                        <b>Boddypilow</b>
-                        <b>Boddypilow</b>
-                   
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
+    <script src="/character_script.js"></script>
+</body>
+</html>
 
 
 
