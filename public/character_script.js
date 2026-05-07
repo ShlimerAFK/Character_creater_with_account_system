@@ -24,15 +24,26 @@ let dexterity;
 let intelligence;
 let charisma;
 
-const id = 1;
+let id;
 
 
-async function load_character(){
+async function get_id(){
+    const response = await fetch(`/charecter_id`);
+    const user_info = await response.json();
+
+    id = user_info.user_info.id
+
+    console.log(id)
+
+    load_character(id);
+
+    return id;
+}
+
+async function load_character(id){
 
     const response = await fetch(`/character_stats/${id}`);
     const character_data = await response.json();
-
-    console.log(character_data);
 
 
     strength = character_data.strength;
@@ -50,6 +61,7 @@ async function load_character(){
 
 async function save_character(){
     try{
+        console.log(id)
         console.log("Posting")
 
         const response = await fetch(`/uppdate_stats/${id}`, {
@@ -61,8 +73,7 @@ async function save_character(){
                 strength: strength,
                 dexterity: dexterity,
                 intelligence: intelligence,
-                charisma: charisma,
-                id: 1
+                charisma: charisma
             })
         })
         const data = await response.json();
@@ -119,7 +130,8 @@ function decrease_stat(stat){
 
 // Loose code 
 
-window.onload = load_character();
+
+window.onload = get_id();
 
 save_button.addEventListener("click", () => save_character());
 

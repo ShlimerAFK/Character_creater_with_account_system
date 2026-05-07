@@ -18,6 +18,7 @@ let dexterity;
 
 // Functions
 
+
 function uppdate_character_stats(id, uppdated_stats){
 
     db.update(character).set(uppdated_stats).where(eq(character.id, id)).run();
@@ -86,10 +87,10 @@ function login(input_username, input_password){
 
         if(current_user.username = username && password_matches){
 
-            return true;
+            return current_user;
 
         } else {
-            
+
             return false;
         }
 

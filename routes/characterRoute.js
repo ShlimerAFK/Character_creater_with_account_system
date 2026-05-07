@@ -17,4 +17,6 @@ router.post("/login", characterController.login)
 router.get("/register", characterController.render_register_page);
 router.post("/register", characterController.post_new_user);
 
+router.get("/charecter_id", characterController.get_charecter_id);
+
 module.exports = router;

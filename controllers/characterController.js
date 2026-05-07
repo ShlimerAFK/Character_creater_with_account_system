@@ -13,13 +13,13 @@ function render_character_page(req,res){
             user: req.session.user
         })
 
+
+
     } else{
 
-        res.render("register",{
-            title: "Register",
-            user: req.session.user
+        res.render("login",{
+            title: "Login",
         });
-        console.log("")
     }
 };
 
@@ -34,31 +34,58 @@ function render_log_in_page(req,res){
 function render_register_page(req,res){
 
     res.render("register",{
-        title: "Register"
+        title: "Register",
+
     })
 };
 
 function render_account_settings_page(req,res){
 
+    if(req.session.user){
         res.render("accountSettings",{
 
-            title: "Account Settings"
+            title: "Account Settings",
+            user: req.session.user,
+
         })
+
+    } else{
+
+        res.render("login",{
+            title: "Login",
+        });
+
+    }
 };
 
 // CRUD
+
+function get_charecter_id(req, res){
+
+    const user_information = req.session.user
+
+    res.json({
+        user_info: user_information
+    })
+}
 
 function login(req,res){
 
     const username = req.body.username
     const password = req.body.password
 
-    const is_logged_in = character_model.login(username, password)
+    const current_user = character_model.login(username, password)
+    const user_id = current_user.id
 
-    if(is_logged_in){
-        req.session.user = username
+    if(current_user){
+        req.session.user = {
+            name: username,
+            id: user_id
+
+        }
+  
         res.redirect("/")
-        console.log(req.session.user)
+    
 
     }else{
         res.redirect("/login")
@@ -128,5 +155,6 @@ module.exports = {
     get_character_stats,
     put_uppdated_character_stats,
     post_new_user,
-    login
+    login,
+    get_charecter_id
 };
