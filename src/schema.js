@@ -1,5 +1,13 @@
 const { sqliteTable, integer, text } = require('drizzle-orm/sqlite-core');
 
+
+const user = sqliteTable('user',{
+
+    id: integer('id').primaryKey({autoIncrement: true}),
+    username: text('username').notNull().unique(),
+    password: text('password').notNull()
+})
+
 const character = sqliteTable('character', {
 
     id: integer('id').primaryKey({autoIncrement: true}),
@@ -8,14 +16,7 @@ const character = sqliteTable('character', {
     dexterity: integer('dexterity').notNull(),
     intelligence: integer('intelligence').notNull(),
     charisma: integer('charisma').notNull(),
-    user_id: integer('user_id').references(() => user.id)  
-})
-
-const user = sqliteTable('user',{
-
-    id: integer('id').primaryKey({autoIncrement: true}),
-    username: text('username').notNull(),
-    password: text('password').notNull()
+    user_id: integer('user_id').notNull().references(() => user.id)
 })
 
 const weapon = sqliteTable('weapon',{

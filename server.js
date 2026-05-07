@@ -2,6 +2,8 @@ require('dotenv').config();
 
 const express = require("express");
 const express_Layouts = require("express-ejs-layouts");
+const session = require ("express-session")
+
 
 
 const message_Routes = require("./routes/characterRoute");
@@ -18,6 +20,12 @@ app.set("layout", "layout");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(express.json())
+
+app.use(session({
+    secret: "hemlig-nyckel",
+    resave: false,
+    saveUninitialized: true
+}));
 
 app.use("/", message_Routes);
 

@@ -2,45 +2,18 @@
 const { title } = require("node:process");
 
 const { db } = require('../src/db')
-const { character } = require('../src/schema')
+const { character, user } = require('../src/schema')
 const { eq } = require('drizzle-orm');
+const bcrypt = require("bcrypt");
+
 
 // Variable definitions
-
-main_weapon = "Sworb";
-
-hp = 10;
-
-armor = "Cardbord armor";
 
 let strength;
 let intelligence;
 let charisma;
 let dexterity;
 
-
-inventory = [
-    {
-        Title: "Health potion",
-        Info: "Heal 1d4"
-    },
-    {
-        Title: "Haste potion",
-        Info: "Add 100 foot movement" 
-    }
-]
-
-user_credentials = [{
-    id: 1,
-    username: "admin",
-    password: "pasword123",
-    character: {
-        strength: 5,
-        dexterity: 5,
-        intelligence: 5,
-        charisma: 5
-    }
-}]
 
 
 // Functions
@@ -62,11 +35,72 @@ function get_character_from_user_SQL(id){
     return rows;
 }
 
-function add_user(){};
+async function add_new_user(name, password){
+
+    const username = name
+    const encrypted_password = await bcrypt.hash(password, 10)
+
+    try{
+
+        // await db.transaction(async (tx) => {
+
+            await db.insert(user).values({
+                username: username,
+                password: encrypted_password
+
+            });
+
+            const new_user = db.select().from(user).where(eq(user.username, username)).get();
+            const id = new_user.id
+
+            await db.insert(character).values({
+            name: "username",
+            strength: 5,
+            dexterity: 5,
+            intelligence: 5,
+            charisma: 5,
+            user_id: id
+        })
+    // })
+
+        
+        
+    }catch(error){
+        console.log(error)
+    }
+
+};
+
+
+function login(input_username, input_password){
+
+    try{
+        const username = input_username;
+        const password = input_password;
+
+        const current_user = db.select().from(user).where(eq(user.username, username)).get();
+
+        const password_matches = bcrypt.compare(password, current_user.password)
+
+        console.log(password_matches)
+
+        if(current_user.username = username && password_matches){
+
+            return true;
+
+        } else {
+            
+            return false;
+        }
+
+    }catch(error){
+        console.log(error)
+    }
+
+};
+
 
 function remove_user(){};
-
-function log_in(){};
 
 function log_out(){};
 
@@ -85,9 +119,9 @@ function change_weapon(){};
 
 module.exports = {
 
-    add_user,
+    add_new_user,
     remove_user,
-    log_in,
+    login,
     log_out,
     add_object_to_inventory,
     remove_object_from_inventory,

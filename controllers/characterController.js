@@ -5,10 +5,22 @@ const character_model = require("../modes/characterModel")
 
 function render_character_page(req,res){
 
-    res.render("index",{
-        title: "Character creator",
-        layout: false
-    })
+    if(req.session.user){
+
+        res.render("index",{
+            title: "Character creator",
+            layout: false,
+            user: req.session.user
+        })
+
+    } else{
+
+        res.render("register",{
+            title: "Register",
+            user: req.session.user
+        });
+        console.log("")
+    }
 };
 
 
@@ -35,6 +47,24 @@ function render_account_settings_page(req,res){
 };
 
 // CRUD
+
+function login(req,res){
+
+    const username = req.body.username
+    const password = req.body.password
+
+    const is_logged_in = character_model.login(username, password)
+
+    if(is_logged_in){
+        req.session.user = username
+        res.redirect("/")
+        console.log(req.session.user)
+
+    }else{
+        res.redirect("/login")
+
+    } 
+}
 
 function get_character_stats(req, res){
 
@@ -72,11 +102,31 @@ function put_uppdated_character_stats(req, res){
 
 }
 
+function post_new_user(req, res){
+
+    const username = req.body.username
+
+    const password = req.body.password
+
+    const rep_password = req.body.rep_password
+
+    if(password === rep_password){
+        character_model.add_new_user(username, password)
+        res.redirect("/login")
+    }else{
+        res.redirect("/register")
+    }
+
+
+}
+
 module.exports = {
     render_character_page,
     render_log_in_page,
     render_register_page,
     render_account_settings_page,
     get_character_stats,
-    put_uppdated_character_stats
+    put_uppdated_character_stats,
+    post_new_user,
+    login
 };
