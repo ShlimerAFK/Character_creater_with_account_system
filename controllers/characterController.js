@@ -23,17 +23,30 @@ function render_character_page(req,res){
 
 
 function render_log_in_page(req,res){
-
-    res.render("login",{
-        title: "Login"
-    })
+    if(!req.session.user){
+        res.render("login",{
+            title: "Login"
+        })
+    }else{
+        res.render("index",{
+            title: "Character creator",
+            layout: false,
+            user: req.session.user
+        })}
 };
 
 function render_register_page(req,res){
-
-    res.render("register",{
-        title: "Register",
-    })
+    if(!req.session.user){
+        res.render("register",{
+            title: "Register",
+        })
+    }else{
+        res.render("index",{
+            title: "Character creator",
+            layout: false,
+            user: req.session.user
+        })
+    }
 };
 
 function render_account_settings_page(req,res){
@@ -55,32 +68,27 @@ function render_account_settings_page(req,res){
 
 // CRUD
 
-function get_charecter_id(req, res){
 
-    const user_information = req.session.user
-
-    res.json({
-        user_info: user_information
-    })
-}
-
-function login(req,res){
+async function login(req,res){
 
     const username = req.body.username
     const password = req.body.password
 
-    const current_user = character_model.login(username, password)
-    const user_id = current_user.id
+    const current_user = await character_model.login(username, password)
 
-    if(current_user){
+
+    if(current_user !== null){
+        const user_id = current_user.id
+
         req.session.user = {
             name: username,
             id: user_id
         }
-  
+
         res.redirect("/")
-    
+
     }else{
+
         res.redirect("/login")
 
     } 
@@ -88,7 +96,7 @@ function login(req,res){
 
 function get_character_stats(req, res){
 
-    const id = Number(req.params.id);
+    const id = req.session.user.id
 
     const current_character = character_model.get_character_from_user_SQL(id);
 
@@ -109,7 +117,7 @@ function get_character_stats(req, res){
 
 function put_uppdated_character_stats(req, res){
 
-    const id = Number(req.params.id);
+    const id = req.session.user.id
     const uppdated_stats = req.body;
 
     const new_stats = character_model.uppdate_character_stats(id, uppdated_stats);
@@ -119,7 +127,7 @@ function put_uppdated_character_stats(req, res){
     })
 }
 
-function delete_account(req,res){
+async function delete_account(req,res){
 
     const password = req.body.password
     const username = req.body.username
@@ -127,12 +135,14 @@ function delete_account(req,res){
     const current_user = req.session.user
     const id = current_user.id
 
-    const success = character_model.remove_account(id, password, username)
+    const was_deleted = await character_model.remove_account(id, password, username)
 
-    if(success){
+    if(was_deleted){
         req.session.destroy(()=>{
         res.redirect("/register")
-    })
+        })
+    } else{
+        res.redirect("/settings")
     }
 
 }
@@ -145,7 +155,7 @@ function log_out(req, res){
 
 }
 
-function post_new_user(req, res){
+async function post_new_user(req, res){
 
     const username = req.body.username
 
@@ -153,13 +163,19 @@ function post_new_user(req, res){
 
     const rep_password = req.body.rep_password
 
-    if(password === rep_password){
-        character_model.add_new_user(username, password)
-        res.redirect("/login")
-    }else{
-        res.redirect("/register")
+    if(password === rep_password && username && password){
+        const name_already_in_use = await character_model.add_new_user(username, password)  
+        
+        if(name_already_in_use === true){
+            
+            res.redirect("/register")
+
+        }else{
+            res.redirect("/")
+        }
     }
 
+    
 
 }
 
@@ -173,7 +189,6 @@ module.exports = {
     put_uppdated_character_stats,
     post_new_user,
     login,
-    get_charecter_id,
     log_out,
     delete_account
 };

@@ -24,24 +24,11 @@ let dexterity;
 let intelligence;
 let charisma;
 
-let id;
 
 
-async function get_id(){
-    const response = await fetch(`/charecter_id`);
-    const user_info = await response.json();
+async function load_character(){
 
-    id = user_info.user_info.id
-
-
-    load_character(id);
-
-    return id;
-}
-
-async function load_character(id){
-
-    const response = await fetch(`/character_stats/${id}`);
+    const response = await fetch(`/character_stats`);
     const character_data = await response.json();
 
 
@@ -62,7 +49,7 @@ async function save_character(){
     try{
         console.log("Posting")
 
-        const response = await fetch(`/uppdate_stats/${id}`, {
+        const response = await fetch(`/uppdate_stats`, {
             headers: {
             'Content-Type': 'application/json'
             },
@@ -128,7 +115,7 @@ function decrease_stat(stat){
 // Loose code 
 
 
-window.onload = get_id();
+window.onload = load_character;
 
 save_button.addEventListener("click", () => save_character());
 
