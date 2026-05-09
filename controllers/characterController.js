@@ -13,8 +13,6 @@ function render_character_page(req,res){
             user: req.session.user
         })
 
-
-
     } else{
 
         res.render("login",{
@@ -35,7 +33,6 @@ function render_register_page(req,res){
 
     res.render("register",{
         title: "Register",
-
     })
 };
 
@@ -46,7 +43,6 @@ function render_account_settings_page(req,res){
 
             title: "Account Settings",
             user: req.session.user,
-
         })
 
     } else{
@@ -54,7 +50,6 @@ function render_account_settings_page(req,res){
         res.render("login",{
             title: "Login",
         });
-
     }
 };
 
@@ -81,12 +76,10 @@ function login(req,res){
         req.session.user = {
             name: username,
             id: user_id
-
         }
   
         res.redirect("/")
     
-
     }else{
         res.redirect("/login")
 
@@ -124,8 +117,31 @@ function put_uppdated_character_stats(req, res){
     res.json({
         anser: new_stats
     })
+}
 
-    console.log(new_stats)
+function delete_account(req,res){
+
+    const password = req.body.password
+    const username = req.body.username
+
+    const current_user = req.session.user
+    const id = current_user.id
+
+    const success = character_model.remove_account(id, password, username)
+
+    if(success){
+        req.session.destroy(()=>{
+        res.redirect("/register")
+    })
+    }
+
+}
+
+function log_out(req, res){
+
+    req.session.destroy(()=>{
+        res.redirect("/login")
+    })
 
 }
 
@@ -147,6 +163,7 @@ function post_new_user(req, res){
 
 }
 
+
 module.exports = {
     render_character_page,
     render_log_in_page,
@@ -156,5 +173,7 @@ module.exports = {
     put_uppdated_character_stats,
     post_new_user,
     login,
-    get_charecter_id
+    get_charecter_id,
+    log_out,
+    delete_account
 };

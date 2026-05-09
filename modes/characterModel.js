@@ -7,14 +7,6 @@ const { eq } = require('drizzle-orm');
 const bcrypt = require("bcrypt");
 
 
-// Variable definitions
-
-let strength;
-let intelligence;
-let charisma;
-let dexterity;
-
-
 
 // Functions
 
@@ -64,8 +56,6 @@ async function add_new_user(name, password){
         })
     // })
 
-        
-        
     }catch(error){
         console.log(error)
     }
@@ -83,7 +73,6 @@ function login(input_username, input_password){
 
         const password_matches = bcrypt.compare(password, current_user.password)
 
-        console.log(password_matches)
 
         if(current_user.username = username && password_matches){
 
@@ -101,43 +90,38 @@ function login(input_username, input_password){
 };
 
 
-function remove_user(){};
+function remove_account(input_id, input_password, input_username){
 
-function log_out(){};
+    const id = input_id
+    const password = input_password
+    const username = input_username
 
-function add_object_to_inventory(){};
+    current_user = db.select().from(user).where(eq(user.id, id)).get();
 
-function remove_object_from_inventory(){};
+    const password_matches = bcrypt.compare(password, current_user.password)
 
-function change_max_hp(){};
+    if(current_user.username == username && password_matches){
+        
+        const character_result = db.delete(character).where(eq(character.user_id, id)).run();
+        const user_result = db.delete(user).where(eq(user.id, id)).run();
 
-function change_current_hp(){};
+        if( character_result.changes === 0 || user_result.changes === 0){
+            console.log("Error")
+        } else{
+            return true
+        }
+    }
+}
 
-function change_armor(){};
-
-function change_weapon(){};
 
 
 module.exports = {
 
     add_new_user,
-    remove_user,
     login,
-    log_out,
-    add_object_to_inventory,
-    remove_object_from_inventory,
-    change_max_hp,
-    change_current_hp,
-    change_armor,
-    change_weapon,
     uppdate_character_stats,
     get_character_from_user_SQL,
-
-    strength,
-    intelligence,
-    charisma,
-    dexterity
-
+    remove_account
 
 }
 

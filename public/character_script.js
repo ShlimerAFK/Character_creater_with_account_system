@@ -33,7 +33,6 @@ async function get_id(){
 
     id = user_info.user_info.id
 
-    console.log(id)
 
     load_character(id);
 
@@ -61,7 +60,6 @@ async function load_character(id){
 
 async function save_character(){
     try{
-        console.log(id)
         console.log("Posting")
 
         const response = await fetch(`/uppdate_stats/${id}`, {
@@ -78,7 +76,6 @@ async function save_character(){
         })
         const data = await response.json();
 
-        console.log(data)
     }catch(error){
         console.log(error)
     }
