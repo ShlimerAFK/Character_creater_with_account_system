@@ -99,6 +99,7 @@ function get_character_stats(req, res){
     const id = req.session.user.id
 
     const current_character = character_model.get_character_from_user_SQL(id);
+    const inventory = character_model.get_inventory_from_SQL(id)
 
     if(!current_character){
         res.json({
@@ -107,20 +108,33 @@ function get_character_stats(req, res){
     }else{
 
         res.json({
-        strength: current_character.strength,
-        dexterity: current_character.dexterity,
-        intelligence: current_character.intelligence,
-        charisma: current_character.charisma
+            strength: current_character.strength,
+            dexterity: current_character.dexterity,
+            intelligence: current_character.intelligence,
+            charisma: current_character.charisma,
+            hp: current_character.hp,
+            weapon_id: current_character.weapon_id,
+            armor_id: current_character.armor_id,
+            inventory: inventory
         })
+
     }
 }
 
-function put_uppdated_character_stats(req, res){
+async function put_uppdated_character_stats(req, res){
 
     const id = req.session.user.id
-    const uppdated_stats = req.body;
+    const saved_data = req.body;
 
-    const new_stats = character_model.uppdate_character_stats(id, uppdated_stats);
+    const uppdated_stats = saved_data.stats
+    const inventory = saved_data.inventory
+
+    for(let i = 0; i < inventory.length; i++){
+        console.log(inventory[i].name)
+        console.log(inventory[i].item_id)
+    }
+
+    const new_stats = await character_model.uppdate_character_stats(id, uppdated_stats, inventory);
 
     res.json({
         anser: new_stats
@@ -173,9 +187,55 @@ async function post_new_user(req, res){
         }else{
             res.redirect("/")
         }
+    } else{
+
+        res.redirect("/register")
+
     }
 
     
+
+}
+
+function get_weapon(req, res){
+    const id = Number(req.params.id)
+
+    const returned_weapon = character_model.get_weapon_from_sql(id)
+
+    res.json({
+        weapon: returned_weapon.name,
+    })
+}
+
+function get_armor(req, res){
+    const id = Number(req.params.id)
+
+    const returned_armor = character_model.get_armor_from_sql(id)
+
+    res.json({
+        armor: returned_armor.name,
+    })
+}
+
+async function get_table_lengths(req, res){
+
+    const weapon_length = await character_model.get_weapon_table_length();
+    const armor_length = await character_model.get_armor_table_length();
+
+    res.json({
+        weapon_table_length: weapon_length,
+        armor_table_length: armor_length
+    })
+
+}
+
+function get_items_from_sql(req, res){
+
+    const all_items = character_model.get_items_from_sql();
+
+    res.json({
+        items: all_items
+    })
 
 }
 
@@ -190,5 +250,9 @@ module.exports = {
     post_new_user,
     login,
     log_out,
-    delete_account
+    delete_account,
+    get_weapon,
+    get_armor,
+    get_table_lengths,
+    get_items_from_sql
 };

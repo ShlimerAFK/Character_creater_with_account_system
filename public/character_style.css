@@ -150,8 +150,73 @@ footer{
 
     justify-content: center;
     align-items: center;
+
     
 }
+
+#sub_hp_box{
+
+    width: 40%;
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: start;
+    align-items: center;
+
+
+}
+
+.hp_text_box{
+
+    width: 100%;
+    height: 40%;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+}
+#hp_value_box{
+
+    width: 100%;
+    height: 20%;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    font-size: 1.5rem;
+}
+
+.hp_button_box{
+
+    width: 30%;
+    height: 100%;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+}
+
+.hp_button_box button{
+
+    width: 1.5vw;
+    height: 1.5vw;
+
+    border: solid 1px;
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+
+
 
 /* Invetory ------------------------------------------- */
 
@@ -166,16 +231,12 @@ footer{
     justify-content: end;
     align-items: center;
     
-
 }
 
 #inventory_subdevition_sub_box{
 
     width: 100%;
-    min-height: 60vh;
-    max-height: 100%;
-
-    height: fit-content;
+    height: 80%;
 
     display: flex;
     flex-direction: column;
@@ -200,6 +261,17 @@ footer{
 
 }
 
+#armor_and_weapon_box button{
+    
+    width: 1.5vw;
+    height: 1.5vw;
+
+    border: solid 1px;
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+
 #main_weapon_Box{
     width: 100%;
     height: 50%;
@@ -209,6 +281,8 @@ footer{
     align-items: center;
     
 }
+
+
 
 #armor_Box{
 
@@ -221,10 +295,35 @@ footer{
     
 }
 
+.weapon_and_armor_side_text_box{
+    height: 100%;
+    width: 35%;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+}
+
+.weapon_and_armor_center_text_box{
+    height:100%;
+    width: 30%;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+
+
 #inventory_box{
 
     width: 20vw;
-    height: fit-content;
+    height: 100%;
 
     min-height: 35vh;
     max-height: 60vh;
@@ -243,22 +342,51 @@ footer{
 
 }
 
-#inventory_list{
+#inventory_input_box{
 
     width: 100%;
-    height: 100%;
+    height: 15%;
 
     display: flex;
-    flex: wrap;
 
-    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+
+}
+
+#inventory_input_box button{
+    width: 6vw;
+    height: 1.5vw;
+}
+
+#inventory_input_box select{
+    width: 6vw;
+    height: 1.5vw;
+    text-align: center;
+}
+
+#inventory_items_box{
+    width:100%;
+    height:85%;
 
     
+    display: flex;
+    flex-direction: column;
+
+    justify-content: start;
+    align-items: center;
+
+    overflow-y: scroll;
+
 }
 
-#inventory_list b{
-    line-height: 2rem;
+#inventory_items_box p{
+
+    line-height: 0.5rem;
 }
+
+
 
 /* Stats --------------------------------------------- */
 

@@ -2,8 +2,8 @@
 const { title } = require("node:process");
 
 const { db } = require('../src/db')
-const { character, user } = require('../src/schema')
-const { eq } = require('drizzle-orm');
+const { character, user, weapon, armor, item, ownership } = require('../src/schema')
+const { eq, count } = require('drizzle-orm');
 const bcrypt = require("bcrypt");
 
 
@@ -11,21 +11,59 @@ const bcrypt = require("bcrypt");
 // Functions
 
 
-function uppdate_character_stats(id, uppdated_stats){
+async function uppdate_character_stats(id, uppdated_stats, input_inventory){
 
-    db.update(character).set(uppdated_stats).where(eq(character.id, id)).run();
+    const inventory = input_inventory
 
-    const new_stats = db.select().from(character).where(eq(character.id, id)).get();
+    console.log("uppdate: " + inventory[0])
 
-    return new_stats;
+    db.update(character).set(uppdated_stats).where(eq(character.user_id, id)).run();
+
+    const current_character = db.select().from(character).where(eq(character.user_id, id)).get();
+
+    db.delete(ownership).where(eq(ownership.char_id, current_character.id)).run();
+
+    for(let i = 0; i < inventory.length; i++){
+
+        await db.insert(ownership).values({
+            char_id: current_character.id,
+            item_id: inventory[i].item_id
+            })
+    }
+
+    return current_character
     
 }
 
 function get_character_from_user_SQL(id){
 
-    const rows = db.select().from(character).where(eq(character.id, id)).get();
+    const current_character = db.select().from(character).where(eq(character.user_id, id)).get();
 
-    return rows;
+    return current_character;
+}
+
+function get_inventory_from_SQL(id){
+
+    const current_charecter = db.select().from(character).where(eq(character.user_id, id)).get();
+    const character_id = current_charecter.id;
+
+    const current_ownership = db.select().from(ownership).where(eq(ownership.char_id, character_id)).all();
+
+    const inventory = [];
+
+    for(let i = 0; i < current_ownership.length; i++){
+
+        const current_item = db.select().from(item).where(eq(item.id, current_ownership[i].item_id)).get();
+
+        inventory.push({
+            name: current_item.name,
+            item_id: current_item.id
+        })
+        
+    }
+
+
+    return inventory
 }
 
 async function add_new_user(name, password){
@@ -55,6 +93,9 @@ async function add_new_user(name, password){
                 dexterity: 5,
                 intelligence: 5,
                 charisma: 5,
+                hp: 30,
+                weapon_id: 1,
+                armor_id: 1,
                 user_id: id
             })
         // })
@@ -138,6 +179,44 @@ async function remove_account(input_id, input_password, input_username){
     }
 }
 
+function get_weapon_from_sql(input_id){
+
+    const id = input_id
+    const current_weapon = db.select().from(weapon).where(eq(weapon.id, id)).get()
+
+    return current_weapon
+}
+
+function get_armor_from_sql(input_id){
+
+    const id = input_id
+    const current_armor = db.select().from(armor).where(eq(armor.id, id)).get()
+
+
+    return current_armor
+}
+
+async function get_weapon_table_length(){
+
+    const length = await db.select({ count: count() }).from(weapon);
+
+    return length[0].count
+}
+
+async function get_armor_table_length(){
+
+    const length = await db.select({ count: count() }).from(armor);
+
+    return length[0].count
+}
+
+function get_items_from_sql(){
+
+    const items = db.select().from(item).all()
+
+
+    return items
+}
 
 
 module.exports = {
@@ -146,7 +225,13 @@ module.exports = {
     login,
     uppdate_character_stats,
     get_character_from_user_SQL,
-    remove_account
+    remove_account,
+    get_weapon_from_sql,
+    get_armor_from_sql,
+    get_weapon_table_length,
+    get_armor_table_length,
+    get_items_from_sql,
+    get_inventory_from_SQL
 
 }
 

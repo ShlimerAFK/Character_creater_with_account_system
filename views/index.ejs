@@ -105,7 +105,25 @@
 
                 <div id="picture_box"></div>
 
-                <div id="hp_box"> <h2>HP: 100</h2> </div>
+                <div id="hp_box"> 
+
+                    <div class="hp_button_box">
+                        <button id="hp_decrament_button">-</button>
+                    </div>
+
+                    <div id="sub_hp_box">
+
+                        <div class="hp_text_box"> <h2>Current hp</h2> </div>
+                        <div id="hp_value_box"> <p id="hp_value_text"> </p> </div>
+                        <div class="hp_text_box"> <p id="hp_bottom_text"> Full HP </p> </div>
+
+                    </div> 
+
+                    <div class="hp_button_box">
+                        <button id="hp_incrament_button">+</button>
+                    </div>
+
+                </div>
 
             </div>
 
@@ -119,22 +137,41 @@
                 <div id="inventory_subdevition_sub_box">
                     <div id="armor_and_weapon_box">
 
-                        <div id="main_weapon_Box"> <h2>Weapon</h2> <p>: Sword</p></div>
-                        <div id="armor_Box">    <h2>Armor</h2> <p>: Cardbord</p></div>
+                        <div id="main_weapon_Box"> 
+
+                            <div class="weapon_and_armor_side_text_box"> <h2>Weapon</h2> </div> 
+
+                            <div class="weapon_and_armor_center_text_box"><p id="current_weapon"> Sword</p> </div>
+                            
+                            <div class="weapon_and_armor_side_text_box"> <button id="weapon_button" > > </button> </div>
+
+                        </div>
+
+
+                        <div id="armor_Box">    
+                            <div class="weapon_and_armor_side_text_box"><h2>Armor</h2> </div>
+
+                            <div class="weapon_and_armor_center_text_box"><p id="current_armor"> Cardbord</p> </div>
+
+                            <div class="weapon_and_armor_side_text_box"><button id="armor_button"> > </button> </div>
+
+                        </div>
 
                     </div>
-                    <div id="inventory_box">
-                        <ul id="inventory_list">
-                            <b>Postion</b>
-                            <b>Rusty dagger</b>
-                            <b>Boddypilow</b>
-                            <b>Boddypilow</b>
-                            <b>Boddypilow</b>
-                            <b>Boddypilow</b>
-                            <b>Boddypilow</b>
-                            <b>Boddypilow</b>
-                    
-                        </ul>
+                    <div id="inventory_box"> 
+                        <div id="inventory_input_box"> 
+
+
+                            <select name="item_select" id="item_select">
+                                <option disabled selected></option>
+                            </select>
+
+                            <button id="inventory_add_button"> Add item</button>
+
+                        </div>
+
+                        <div id="inventory_items_box"></div>
+
                     </div>
                 </div>
 

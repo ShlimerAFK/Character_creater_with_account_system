@@ -21,4 +21,10 @@ router.get("/logout", characterController.log_out)
 router.get("/register", characterController.render_register_page);
 router.post("/register", characterController.post_new_user);
 
+router.get("/weapon/:id", characterController.get_weapon)
+router.get("/armor/:id", characterController.get_armor)
+
+router.get("/lengths", characterController.get_table_lengths)
+router.get("/items", characterController.get_items_from_sql)
+
 module.exports = router;

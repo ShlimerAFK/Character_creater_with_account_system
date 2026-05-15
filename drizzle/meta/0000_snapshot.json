@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "ff7b034b-4cb9-4d36-82fc-30ae306ac595",
+  "id": "98ffc9dd-a30d-4f70-834a-d518b90255b1",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "character": {
@@ -49,6 +49,27 @@
           "notNull": true,
           "autoincrement": false
         },
+        "hp": {
+          "name": "hp",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "weapon_id": {
+          "name": "weapon_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "armor_id": {
+          "name": "armor_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
         "user_id": {
           "name": "user_id",
           "type": "integer",
@@ -59,6 +80,32 @@
       },
       "indexes": {},
       "foreignKeys": {
+        "character_weapon_id_weapon_id_fk": {
+          "name": "character_weapon_id_weapon_id_fk",
+          "tableFrom": "character",
+          "tableTo": "weapon",
+          "columnsFrom": [
+            "weapon_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "character_armor_id_armor_id_fk": {
+          "name": "character_armor_id_armor_id_fk",
+          "tableFrom": "character",
+          "tableTo": "armor",
+          "columnsFrom": [
+            "armor_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
         "character_user_id_user_id_fk": {
           "name": "character_user_id_user_id_fk",
           "tableFrom": "character",
@@ -184,6 +231,64 @@
       },
       "indexes": {},
       "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "ownership": {
+      "name": "ownership",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "char_id": {
+          "name": "char_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "item_id": {
+          "name": "item_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "ownership_char_id_character_id_fk": {
+          "name": "ownership_char_id_character_id_fk",
+          "tableFrom": "ownership",
+          "tableTo": "character",
+          "columnsFrom": [
+            "char_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "ownership_item_id_item_id_fk": {
+          "name": "ownership_item_id_item_id_fk",
+          "tableFrom": "ownership",
+          "tableTo": "item",
+          "columnsFrom": [
+            "item_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "checkConstraints": {}

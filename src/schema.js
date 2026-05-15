@@ -16,6 +16,9 @@ const character = sqliteTable('character', {
     dexterity: integer('dexterity').notNull(),
     intelligence: integer('intelligence').notNull(),
     charisma: integer('charisma').notNull(),
+    hp: integer('hp').notNull(),
+    weapon_id: integer('weapon_id').notNull().references(() => weapon.id),
+    armor_id: integer('armor_id').notNull().references(() => armor.id),
     user_id: integer('user_id').notNull().references(() => user.id)
 })
 
@@ -35,6 +38,12 @@ const item = sqliteTable('item',{
     name: text('name').notNull()
 })
 
+const ownership = sqliteTable('ownership',{
+    id: integer('id').primaryKey({autoIncrement: true}),
+    char_id: integer('char_id').notNull().references(()=> character.id),
+    item_id: integer('item_id').notNull().references(()=> item.id)
+})
+
 
 
 module.exports = {
@@ -42,5 +51,6 @@ character,
 user,
 weapon,
 armor,
-item
+item,
+ownership
 }
