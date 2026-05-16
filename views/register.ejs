@@ -10,15 +10,15 @@
 
 
     <div>
-        <input placeholder="Username" type="text" id="username" name="username">
+        <input placeholder="Username" type="text" id="username" name="username" pattern="^[a-öA-Ö0-9]{1,15}$" title="Username cant use special charectars and must be between 1 and 15 characters">
     </div>
 
     <div>
-        <input placeholder="Password" type="password" id="password" name="password">
+        <input placeholder="Password" type="password" id="password" name="password" pattern="^[a-öA-Ö0-9]{3,15}$" title="Password must be between 3 and 20 characters and cant use special characters">
     </div>
 
     <div>
-        <input placeholder="Repeat Password" type="password" id="rep_password" name="rep_password">
+        <input placeholder="Repeat Password" type="password" id="rep_password" name="rep_password" pattern="^[a-öA-Ö0-9]{3,15}$">
     </div>
 
     <button type="submit">Register</button>

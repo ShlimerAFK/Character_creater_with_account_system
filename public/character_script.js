@@ -36,6 +36,9 @@ const inventory_box = document.getElementById("inventory_items_box")
 
 const save_button = document.getElementById("save_button")
 
+const image_input = document.getElementById("picture_input")
+const image_box = document.getElementById("picture_box")
+
 let strength;
 let dexterity;
 let intelligence;
@@ -276,7 +279,6 @@ function remove_item_from_inventory(element){
         }
     }
 
-
 }
 
 function uppdate_inventory_div_contetnt(){
@@ -300,7 +302,6 @@ async function get_all_items(){
 
         item_select.innerHTML += `<option id="${data.items[i].id}" value="${data.items[i].name}"> ${data.items[i].name} </option>`
 
-    
     }
 }
 
@@ -332,3 +333,5 @@ weapon_button.addEventListener("click", () => increase_weapon_index())
 armor_button.addEventListener("click", () => increase_armor_index())
 
 inventory_add_button.addEventListener("click", () => add_item_to_inventory())   
+
+
