@@ -150,7 +150,6 @@ footer{
 }
 
 
-
 #hp_box{
 
     width: 20vw;
@@ -395,6 +394,10 @@ footer{
 
     overflow-y: scroll;
 
+}
+
+#inventory_items_box :hover{
+    text-decoration: line-through;
 }
 
 #inventory_items_box p{

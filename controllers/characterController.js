@@ -129,11 +129,6 @@ async function put_uppdated_character_stats(req, res){
     const uppdated_stats = saved_data.stats
     const inventory = saved_data.inventory
 
-    for(let i = 0; i < inventory.length; i++){
-        console.log(inventory[i].name)
-        console.log(inventory[i].item_id)
-    }
-
     const new_stats = await character_model.uppdate_character_stats(id, uppdated_stats, inventory);
 
     res.json({

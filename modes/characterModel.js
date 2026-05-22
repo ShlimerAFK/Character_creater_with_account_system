@@ -15,8 +15,6 @@ async function uppdate_character_stats(id, uppdated_stats, input_inventory){
 
     const inventory = input_inventory
 
-    console.log("uppdate: " + inventory[0])
-
     db.update(character).set(uppdated_stats).where(eq(character.user_id, id)).run();
 
     const current_character = db.select().from(character).where(eq(character.user_id, id)).get();
